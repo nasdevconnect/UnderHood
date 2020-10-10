@@ -9,12 +9,17 @@ using Android.OS;
 using Xamarin.Forms;
 using UnderHood.Droid.Services.Bluetooth;
 using UnderHood.Services.BlueTooth;
+using UnderHood.Droid.Services.Activity;
 
 namespace UnderHood.Droid
 {
     [Activity(Label = "UnderHood", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        public MainActivity()
+        {
+            Global.I.MainActivity = this;
+        }
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -26,14 +31,14 @@ namespace UnderHood.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             RegisterServices();
-            DependencyService.Register<IBluetoothService, BluetoothService>();
 
             LoadApplication(new App());
         }
 
         void RegisterServices()
         {
-
+            DependencyService.Register<IActivityService, ActivityService>();
+            DependencyService.Register<IBluetoothService, BluetoothService>();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

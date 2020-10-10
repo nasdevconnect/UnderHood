@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnderHood.Models;
-using Xamarin.Forms;
 
-namespace UnderHood
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace UnderHood.Views
 {
-    public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class BluetoothView : ContentView
     {
-        public MainPage()
+        public BluetoothView()
         {
             InitializeComponent();
         }

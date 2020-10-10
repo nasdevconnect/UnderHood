@@ -11,15 +11,35 @@ using Android.Views;
 using Android.Widget;
 using Xamarin.Forms;
 using UnderHood.Services.BlueTooth;
+using UnderHood.Droid.Services.Activity;
 
 [assembly: Dependency(typeof(UnderHood.Droid.Services.Bluetooth.BluetoothService))]
 namespace UnderHood.Droid.Services.Bluetooth
 {
-    class BluetoothService : UnderHood.Services.BlueTooth.IBluetoothService
+    public class BluetoothService : IBluetoothService
     {
+        IActivityService activityService = DependencyService.Get<IActivityService>();
+
+        const int REQUEST_CONNECT_DEVICE_SECURE = 1;
+        const int REQUEST_CONNECT_DEVICE_INSECURE = 2;
+        const int REQUEST_ENABLE_BT = 3;
+
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.DefaultAdapter;
         string[] IBluetoothService.NearByDevices()
         {
-            throw new NotImplementedException();
+            var devices = new string[0];
+            if (bluetoothAdapter == null)
+            {
+                //Bluetooth is not available
+            }
+
+            if (!bluetoothAdapter.IsEnabled)
+            {
+                var enableIntent = new Intent(BluetoothAdapter.ActionRequestEnable);
+                activityService.StartActivity(enableIntent);
+            }
+
+            return devices;
         }
     }
 }
