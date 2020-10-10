@@ -12,7 +12,7 @@
     <StackLayout>
         <Label Text="{Binding PageTitle}" HorizontalOptions="CenterAndExpand" />
         <StackLayout Orientation="Horizontal">
-            <StackLayout WidthRequest="150">
+            <StackLayout WidthRequest="75">
                 <ListView ItemsSource="{Binding Sections}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -25,7 +25,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-            <Controls:StackLayoutDynamicChildren DynamicChildren="{Binding DetailViewChildren}"  />
+            <Controls:StackLayoutDynamicChildren Style="{StaticResource SectionStack}" DynamicChildren="{Binding DetailViewChildren}" Margin="3"  />
         </StackLayout>
     </StackLayout>
 

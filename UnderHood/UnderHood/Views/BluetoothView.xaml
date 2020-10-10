@@ -7,7 +7,7 @@
         <VMs:BluetoothViewModel />
     </ContentView.BindingContext>
     <ContentView.Content>
-      <StackLayout>
+        <StackLayout  Style="{StaticResource SectionStack}">
             <Label Text="{Binding PageTitle}" HorizontalOptions="CenterAndExpand" />
         </StackLayout>
   </ContentView.Content>
